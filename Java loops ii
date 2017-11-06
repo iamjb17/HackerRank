@@ -1,3 +1,9 @@
+/*
+Hate to say it but this one took me a while. I need to remember to 
+look at the whole question and not just skip to the examples
+Thing to remember: Use class/java supplied methods whenever you can
+no need to recreate the wheel if whats created already does the job.
+*/
 import java.util.*;
 import java.io.*;
 
