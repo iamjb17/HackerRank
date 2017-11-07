@@ -17,14 +17,18 @@ class Solution{
             int b = in.nextInt();
             int n = in.nextInt();
             int tempResult = a + (1 * b);
-            System.out.print(tempResult);
+            System.out.print(tempResult + " ");
+            if(n > 1) {
             for (int j = 1; j <= n-1; j++){
                 x = ((int)Math.pow(2.0,j)) *b;
                 tempResult = tempResult + x;
-                System.out.print(" "+tempResult);
+                System.out.print(tempResult + " ");
                 if (j==n-1){
                     System.out.println();
+                    }
                 }
+            } else {
+                System.out.println();
             }
         }
         
