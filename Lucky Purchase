@@ -1,0 +1,126 @@
+/*
+Question:
+Sharon wants to buy a laptop for programming. She plans on buying a laptop whose price is made of digits 4 and 7 only. The number of 4s and 7s in the price should be equal. You are given laptop brand names and their prices. Find and print the name of the laptop brand that satisfies the above criteria. If there are multiple brands that meet the criteria, print the name of the one with the minimum price. If none of the laptops meet the criteria print -1.
+
+For example, if Sharon has a choice between laptops 'BestBook' priced at 444777 and 'LapBook' priced at 7744, the solution should indicate ideal choice to be 'LapBook'. Although both 'BestBook' and 'LapBook' have equal number of 4s and 7s in the price, 'LapBook' is priced lower which makes it the right choice for Sharon.
+
+Input Format
+
+The first line contains an integer , denoting the number of laptops. 
+The next  lines contains one string (name of company laptop) and an integer describing the value of each laptop.
+
+Constraints
+
+name of laptop consists of English letters only.
+Both name and price for laptops are unique.
+
+Output Format
+
+If answer doesn't exist, print -1. 
+Otherwise, print the name of the brand whose laptop costs the least (minimum lucky number) and meets the required criteria.
+
+Sample Input 0
+
+4
+HackerBook 777444
+RankBook 3
+TheBook 777
+BestBook 47
+Sample Output 0
+
+BestBook
+Explanation 0
+
+Both 'HackerBook' and 'BestBook' meet the given conditions (equal number of 4s and 7s in the price), and since BestBook has a lower price, it becomes the correct choice and hence is displayed as ouput.
+
+Sample Input 1
+
+1
+abacab 121
+Sample Output 1
+
+-1
+Explanation 1
+
+Since 121 does not consists of 4s and 7s we don't have any laptop satisfying the criteria. Hence, we print -1.
+*/
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    
+    public static boolean equalNum(int value) {
+        String val = String.valueOf(value);
+        String txt = "";
+        int four = 0;
+        int seven = 0;
+        for(int i = 0; i < val.length(); i++){
+            txt = Character.toString(val.charAt(i));
+            if (txt.equals("4")){
+                four++;
+            }
+            if (txt.equals("7")){
+                seven++;
+            }
+            //System.out.println(txt);
+        }
+        if (four == seven && four != 0 && seven != 0){
+            return true;
+        } 
+        return false;
+        
+    }
+    
+    public static int findSmallest(List<Integer> values){
+          int minIndex = 0;
+    if (values.isEmpty()) {
+        minIndex = -1;
+    } else {
+        final ListIterator<Integer> itr = values.listIterator();
+        int min = itr.next(); // first element as the current minimum
+        minIndex = itr.previousIndex();
+        while (itr.hasNext()) {
+            
+            Integer curr = itr.next();
+            if (curr.compareTo(min)< 0 && curr !=-1 && min != -1) {
+                min = curr;
+                minIndex = itr.previousIndex();
+            }
+        }
+    }
+    return minIndex;
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int fal = 0;
+        List<String> brands = new ArrayList<>();
+        List<Integer> values = new ArrayList<>();
+        for(int a0 = 0; a0 < n; a0++){
+            String name = in.next();
+            brands.add(name);
+            int value = in.nextInt();
+            values.add(value);
+            //System.out.println(equalNum(value));
+            if (!equalNum(value)){
+                values.set(a0,-1);
+               fal++; 
+            } 
+        }
+        //int minIndex = List.indexOf(Collections.min(values));
+        
+        if(fal==n){
+            System.out.println("-1");
+        } else {
+            System.out.print(brands.get(findSmallest(values)));
+        }
+        //System.out.println(brands);
+        //System.out.println(values);
+        in.close();
+    }
+}
